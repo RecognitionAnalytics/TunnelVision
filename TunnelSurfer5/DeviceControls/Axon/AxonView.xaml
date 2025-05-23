@@ -1,0 +1,159 @@
+﻿<UserControl x:Class="TunnelVision.DeviceControls.Axon.AxonView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+              xmlns:YATE="clr-namespace:YATE;assembly=YATE"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TunnelVision.DeviceControls.Axon"
+             mc:Ignorable="d" MinWidth="870"
+             d:DesignHeight="600" d:DesignWidth="864.03">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition MinWidth="120"/>
+            <ColumnDefinition MinWidth="120"/>
+            <ColumnDefinition MinWidth="120"/>
+            <ColumnDefinition MinWidth="120"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <TextBlock   Grid.Row="0"   Text="Wafer Reference (mV)">
+                <TextBlock.Style>
+                    <Style TargetType="TextBlock">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IonicBold}" Value="True">
+                                <Setter Property="FontWeight" Value="Bold"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+            <TextBox  Grid.Row="1"   x:Name="tbTopVoltage" Margin="5,0,5,0" Text="{Binding VBias0}">
+
+            </TextBox>
+            <ListBox Grid.Row="2"   x:Name="lbTopVoltage" Margin="5,0,5,0" SelectionChanged="lbTopVoltage_SelectionChanged" ItemsSource="{Binding IonicVoltages}" Height="100" />
+
+            <TextBlock Grid.Row="3"  Text="Tunnel Voltage Top(mV)" Margin="5,0,5,0">
+                <TextBlock.Style>
+                    <Style TargetType="TextBlock">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding TunnelBold}" Value="True">
+                                <Setter Property="FontWeight" Value="Bold"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+
+            </TextBlock>
+            <TextBox Grid.Row="4" x:Name="tbTraceVoltage1"  Text="{Binding VClamp1}" Margin="5,0,5,0"></TextBox>
+            <ListBox Grid.Row="5"  x:Name="lbTraceVoltage1" SelectionChanged="lbTraceVoltage1_SelectionChanged"   ItemsSource="{Binding TraceVoltages}" Height="100" Margin="5,0,5,0"/>
+        </Grid>
+
+
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <TextBlock   Grid.Row="0"  Text="Nitride Reference (mV)" Margin="5,0,5,0">
+                <TextBlock.Style>
+                    <Style TargetType="TextBlock">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IonicBold}" Value="True">
+                                <Setter Property="FontWeight" Value="Bold"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+            <TextBox  Grid.Row="1"   x:Name="tbBottomVoltage" Margin="5,0,5,0" Text="{Binding VClamp0}"></TextBox>
+            <ListBox  Grid.Row="2"  x:Name="lbBottomVoltage" Margin="5,0,5,0" SelectionChanged="lbBottomVoltage_SelectionChanged" ItemsSource="{Binding IonicVoltages}" Height="100" />
+
+            <TextBlock Grid.Row="3"  Text="Tunnel Voltage Bottom (mV)" Margin="5,0,5,0">
+                <TextBlock.Style>
+                    <Style TargetType="TextBlock">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding TunnelBold}" Value="True">
+                                <Setter Property="FontWeight" Value="Bold"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+
+            </TextBlock>
+            <TextBox Grid.Row="4" x:Name="tbTraceVoltageBot"  Text="{Binding VBias1}" Margin="5,0,5,0"></TextBox>
+            <ListBox Grid.Row="5"  x:Name="lbTraceVoltageBot"  SelectionChanged="lbTraceVoltageBot_SelectionChanged"  ItemsSource="{Binding TraceVoltages}" Height="100" Margin="5,0,5,0"/>
+
+        </Grid>
+
+        <StackPanel Grid.Column="2"  Orientation="Vertical" HorizontalAlignment="Stretch">
+            <TextBlock   Text="Run Time" Margin="5,0,5,0"></TextBlock>
+            <TextBox  x:Name="tbRunTime"  Text="{Binding RunTime}" Margin="5,0,5,0"></TextBox>
+            <ListBox   x:Name="lbRunTime"  SelectionChanged="lbRunTime_SelectionChanged"  ItemsSource="{Binding RunTimes}" Height="100" Margin="5,0,5,0"/>
+
+            <TextBlock   Text="Sample Rate (ms)" Margin="5,0,5,0"></TextBlock>
+            <TextBox  x:Name="tbSampleRate"  Text="{Binding SampleRate}" Margin="5,0,5,0"></TextBox>
+            <ListBox   x:Name="lbSampleRate"  SelectionChanged="lbRate_SelectionChanged"  ItemsSource="{Binding SampleRates}" Height="100" Margin="5,0,5,0"/>
+
+
+
+        </StackPanel>
+        <Grid Grid.Column="3">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" Text="Trace Name"  Margin="5,0,5,0"></TextBlock>
+            <TextBox  Grid.Row="1"    x:Name="tbTraceName" Height="23" TextWrapping="Wrap" Text="{Binding TraceName,Mode=TwoWay}"  Margin="5,0,5,0"/>
+            <TextBlock   Grid.Row="2"   Text="Notes"  Margin="5,0,5,0"></TextBlock>
+            <YATE:YATEditor  Grid.Row="3"   x:Name="NewNote" Height="100"   Margin="5,0,5,0"  VerticalAlignment="Stretch" />
+
+            <TextBlock  Grid.Row="5"   Text=""></TextBlock>
+
+            <StackPanel Grid.Row="6"  x:Name="TakeData">
+
+                <TextBlock  Margin="5,0,5,0">Gain</TextBlock>
+                <TextBox x:Name="tbGain"  Margin="5,0,5,0" Text="{Binding Gain}"></TextBox>
+                <TextBlock  Margin="5,0,5,0">Filtering (kHz)</TextBlock>
+                <TextBox x:Name="tbFilter"  Margin="5,0,5,0" Text="{Binding FilterKHz}"></TextBox>
+                <TextBlock   Text=""></TextBlock>
+                <Button Height="51" Margin="10,0,7,0" x:Name="btnStartData" Click="btnStartData_Click" >Start</Button>
+                <!--<Button Height="51" Margin="10,0,7,0" >Stop</Button>-->
+                <!--<Button Height="51" Margin="10,0,7,0" x:Name="btnSave" Visibility="Collapsed" Click="btnSave_Click">Save</Button> -->
+                <Button Height="51" Margin="10,0,7,0" x:Name="btnExport"  Visibility="Collapsed" Click="btnExport_Click">Export</Button>
+            </StackPanel>
+        </Grid>
+
+    </Grid>
+</UserControl>

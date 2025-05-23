@@ -1,0 +1,52 @@
+﻿<UserControl x:Class="TunnelVision.Controls.JunctionContents"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:Controls="clr-namespace:TunnelVision.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="170">
+    <UserControl.Resources>
+        <DataTemplate DataType="{x:Type Controls:IVFolder}">
+            <StackPanel HorizontalAlignment="Stretch">
+                <TextBlock >Tunneling IV Curves</TextBlock>
+                <ListBox ItemsSource="{Binding TunnelingCurves}" HorizontalAlignment="Stretch"></ListBox>
+                <TextBlock >Ionic IV Curves</TextBlock>
+                <ListBox ItemsSource ="{Binding IonicCurves}" HorizontalAlignment="Stretch">
+
+                </ListBox>
+            </StackPanel>
+        </DataTemplate>
+        <DataTemplate  DataType="{x:Type Controls:OrderedAnalyte}">
+            <StackPanel HorizontalAlignment="Stretch">
+                <TextBlock Text="{Binding FolderName}" ></TextBlock>
+                <ListBox ItemsSource="{Binding Traces}" HorizontalAlignment="Stretch">
+
+
+                </ListBox>
+            </StackPanel>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type Controls:TimeFolder}">
+            <StackPanel HorizontalAlignment="Stretch">
+                <TextBlock >Ordered Analytes</TextBlock>
+                <ListBox ItemsSource="{Binding Analytes}" HorizontalAlignment="Stretch">
+                    
+                    
+                </ListBox>
+              </StackPanel>
+        </DataTemplate>
+
+    </UserControl.Resources>
+    <StackPanel>
+        <TextBlock >Sorts</TextBlock>
+        <StackPanel Orientation="Horizontal">
+            <Button x:Name="Condition">Condition</Button>
+            <Button x:Name="Analyte">Analyte</Button>
+            <Button x:Name="Time">Time</Button>
+        </StackPanel>
+       
+        <ListView x:Name="lbFolders">
+           
+        </ListView>
+    </StackPanel>
+</UserControl>

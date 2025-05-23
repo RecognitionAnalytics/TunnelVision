@@ -1,0 +1,133 @@
+﻿<UserControl x:Class="TunnelVision.DeviceControls.bDAQ.bDAQView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+              xmlns:YATE="clr-namespace:YATE;assembly=YATE"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TunnelVision.DeviceControls"
+             mc:Ignorable="d" MinWidth="870"
+             d:DesignHeight="600" d:DesignWidth="864.03">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition MinWidth="120"/>
+            <ColumnDefinition MinWidth="120"/>
+            <ColumnDefinition MinWidth="120"/>
+            <ColumnDefinition MinWidth="120"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <TextBlock   Grid.Row="0"   Text="Wafer Reference (mV) - VBias0"></TextBlock>
+            <TextBox  Grid.Row="1"   x:Name="tbTopVoltage" Margin="5,0,5,0" Text="{Binding VBias0}"></TextBox>
+            <ListBox Grid.Row="2"   x:Name="lbTopVoltage" Margin="5,0,5,0" SelectionChanged="lbTopVoltage_SelectionChanged" ItemsSource="{Binding IonicVoltages}" Height="100" />
+
+            <TextBlock Grid.Row="3"  Text="Tunnel Voltage Top(mV) - VClamp1" Margin="5,0,5,0"></TextBlock>
+            <TextBox Grid.Row="4" x:Name="tbTraceVoltage1"  Text="{Binding VClamp1}" Margin="5,0,5,0"></TextBox>
+            <ListBox Grid.Row="5"  x:Name="lbTraceVoltage1" SelectionChanged="lbTraceVoltage1_SelectionChanged"   ItemsSource="{Binding TraceVoltages}" Height="100" Margin="5,0,5,0"/>
+
+            <TextBlock Grid.Row="6"  Text="Tunnel Voltage Top(mV) - VClamp2" Margin="5,0,5,0"></TextBlock>
+            <TextBox Grid.Row="7" x:Name="tbTraceVoltage2"  Text="{Binding VClamp2}" Margin="5,0,5,0"></TextBox>
+            <ListBox Grid.Row="8"  x:Name="lbTraceVoltage2"  SelectionChanged="lbTraceVoltage2_SelectionChanged" ItemsSource="{Binding TraceVoltages}" Height="100" Margin="5,0,5,0"/>
+        </Grid>
+
+
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <TextBlock   Grid.Row="0"  Text="Nitride Reference (mV) - vClamp0" Margin="5,0,5,0"></TextBlock>
+            <TextBox  Grid.Row="1"   x:Name="tbBottomVoltage" Margin="5,0,5,0" Text="{Binding VClamp0}"></TextBox>
+            <ListBox  Grid.Row="2"  x:Name="lbBottomVoltage" Margin="5,0,5,0" SelectionChanged="lbBottomVoltage_SelectionChanged" ItemsSource="{Binding IonicVoltages}" Height="100" />
+
+            <TextBlock Grid.Row="3"  Text="Tunnel Voltage Bottom (mV) - Vbias1" Margin="5,0,5,0"></TextBlock>
+            <TextBox Grid.Row="4" x:Name="tbTraceVoltageBot"  Text="{Binding VBias1}" Margin="5,0,5,0"></TextBox>
+            <ListBox Grid.Row="5"  x:Name="lbTraceVoltageBot"  SelectionChanged="lbTraceVoltageBot_SelectionChanged"  ItemsSource="{Binding TraceVoltages}" Height="100" Margin="5,0,5,0"/>
+
+            <TextBlock Grid.Row="6"  Text="Tunnel Voltage Top(mV) - VClamp3" Margin="5,0,5,0"></TextBlock>
+            <TextBox Grid.Row="7" x:Name="tbTraceVoltage3"  Text="{Binding VClamp3}" Margin="5,0,5,0"></TextBox>
+            <ListBox Grid.Row="8"  x:Name="lbTraceVoltage3"  SelectionChanged="lbTraceVoltage3_SelectionChanged"  ItemsSource="{Binding TraceVoltages}" Height="100" Margin="5,0,5,0"/>
+
+        </Grid>
+
+        <StackPanel Grid.Column="2"  Orientation="Vertical" HorizontalAlignment="Stretch">
+            <TextBlock Text="Active Channels" Margin="5,0,5,0"></TextBlock>
+            <ListBox  x:Name="lbProcessedData" SelectionMode="Extended" SelectionChanged="lbProcessedData_SelectionChanged"  Height="125" Margin="5,0,5,0" >
+                <ListBoxItem>Clamp 0</ListBoxItem>
+                <ListBoxItem>Clamp 1</ListBoxItem>
+                <ListBoxItem>Clamp 2</ListBoxItem>
+                <ListBoxItem>Clamp 3</ListBoxItem>
+            </ListBox>
+            <TextBlock    Text="Junction wiring"  Margin="5,0,5,0"></TextBlock>
+            <ListBox  x:Name="lbJunctionData" SelectionMode="Extended" SelectionChanged="lbJunctionData_SelectionChanged"  Height="126" Margin="5,0,5,0" ItemsSource="{Binding AvailableJunctions}">
+              
+            </ListBox>
+            <TextBlock    Text="Run Time (min)"  Margin="5,0,5,0"></TextBlock>
+            <TextBox    x:Name="tbRunTime"  Margin="5,0,5,0" Text="{Binding RunTime}"></TextBox>
+            <ListBox    x:Name="lbRunTime"  Margin="5,0,5,0" SelectionChanged="lbRunTime_SelectionChanged" ItemsSource="{Binding RunTimes}" Height="100"/>
+
+            <Image />
+            <StackPanel   x:Name="AxonOptions" Visibility="Hidden"  Margin="5,0,5,0">
+                <TextBlock  Margin="5,0,5,0">Gain</TextBlock>
+                <TextBox x:Name="tbGain"  Margin="5,0,5,0" Text="{Binding Gain}"></TextBox>
+                <TextBlock  Margin="5,0,5,0">Filtering (kHz)</TextBlock>
+                <TextBox x:Name="tbFilter"  Margin="5,0,5,0" Text="{Binding FilterKHz}"></TextBox>
+            </StackPanel>
+        </StackPanel>
+        <Grid Grid.Column="3">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" Text="Trace Name"  Margin="5,0,5,0"></TextBlock>
+            <TextBox  Grid.Row="1"    x:Name="tbTraceName" Height="23" TextWrapping="Wrap" Text="{Binding TraceName,Mode=TwoWay}"  Margin="5,0,5,0"/>
+            <TextBlock   Grid.Row="2"   Text="Notes"  Margin="5,0,5,0"></TextBlock>
+            <YATE:YATEditor  Grid.Row="3"   x:Name="NewNote" Height="100"   Margin="5,0,5,0"  VerticalAlignment="Stretch" />
+
+            <TextBlock  Grid.Row="5"   Text=""></TextBlock>
+            <TextBlock  Grid.Row="6"   Text=""></TextBlock>
+            <StackPanel Grid.Row="7"  x:Name="TakeData">
+                <Button Height="51" Margin="10,0,7,0" x:Name="btnStartData" Click="btnStartData_Click" >Start</Button>
+                <Button Height="51" Margin="10,0,7,0" x:Name="btnSetToZero" Click="btnSetToZero_Click" >Zero</Button>
+                <Button Height="51" Margin="10,0,7,0" x:Name="btnStartVoltages" Click="btnStartVoltages_Click" >Ready Voltages</Button>
+                <!--<Button Height="51" Margin="10,0,7,0" >Stop</Button>-->
+                <Button Height="51" Margin="10,0,7,0" x:Name="btnSave" Visibility="Collapsed" Click="btnSave_Click">Save</Button>
+                <!--<Button Height="51" Margin="10,0,7,0" x:Name="btnExport"  Visibility="Collapsed" Click="btnExport_Click">Export</Button>-->
+                <Button Height="51" Margin="10,0,7,0" x:Name="btnCalibrate" Visibility="Visible" Click="btnCalibrate_Click">Calibrate Server</Button>
+                <Button Height="51" Margin="10,0,7,0" x:Name="btnKill" Visibility="Visible" Click="btnKill_Click">Kill Server</Button>
+            </StackPanel>
+        </Grid>
+        
+    </Grid>
+</UserControl>

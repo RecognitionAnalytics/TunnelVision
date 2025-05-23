@@ -1,0 +1,60 @@
+﻿<Controls:MetroWindow x:Class="TunnelVision.AddChipWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        Title="Add Chip" Height="589.079" Width="600">
+    <StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <GroupBox Width="344" >
+                <StackPanel>
+                    <ListBox x:Name="Batches" ></ListBox>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Chip Name  "></TextBlock>
+                        <TextBox x:Name="ChipName" Text="Chip" Width="489"/>
+                    </StackPanel>
+                    <TextBlock Text="Chip Notes"></TextBlock>
+                    <TextBox x:Name="Notes" AcceptsReturn="True" Height="151" />
+                    <TextBlock Text="    "/>
+                    <TextBlock >Junctions per chip</TextBlock>
+                    <TextBox Text="3" x:Name="JunctionChips"></TextBox>
+                    <TextBlock >Number Pores</TextBlock>
+                    <TextBox Text="3" x:Name="numberPores"></TextBox>
+                    <TextBlock>Manufactor Date</TextBlock>
+                    <Calendar x:Name="ManufactorDate"/>
+                </StackPanel>
+            </GroupBox>
+            <GroupBox Width="229" >
+                <StackPanel>
+                    <TextBlock >Manufactor Info</TextBlock>
+                    <TextBlock >ALD Material</TextBlock>
+                    <ListBox x:Name="ALDMaterials">
+                        <ListBoxItem  IsSelected="True">AL2O3</ListBoxItem>
+                        <ListBoxItem>SiO2</ListBoxItem>
+                        <ListBoxItem>HfO</ListBoxItem>
+                    </ListBox>
+                    <TextBlock >Number cycles</TextBlock>
+                    <TextBox x:Name="NumberCycles" Text="22"></TextBox>
+                    <TextBlock >Junction Material</TextBlock>
+                    <ListBox x:Name="JunctionMaterials">
+                        <ListBoxItem IsSelected="True">Pd</ListBoxItem>
+                        <ListBoxItem>Au</ListBoxItem>
+                        <ListBoxItem>Other</ListBoxItem>
+                    </ListBox>
+                    <TextBlock >Drill Method</TextBlock>
+                    <ListBox x:Name="DrillMethod">
+                        <ListBoxItem IsSelected="True">RIE</ListBoxItem>
+                        <ListBoxItem>HIM</ListBoxItem>
+                        <ListBoxItem>FIB</ListBoxItem>
+                        <ListBoxItem>TEM</ListBoxItem>
+                        <ListBoxItem>By Chip</ListBoxItem>
+                        <ListBoxItem>Other</ListBoxItem>
+                    </ListBox>
+                    <TextBlock Text="    "/>
+                </StackPanel>
+            </GroupBox>
+
+
+        </StackPanel>
+        <Button Click="Button_Click" >Add Chip</Button>
+    </StackPanel>
+</Controls:MetroWindow>

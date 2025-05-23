@@ -1,0 +1,45 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="TunnelVision.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="DefaultExperiment" Type="System.String" Scope="User">
+      <Value Profile="(Default)">DNA</Value>
+    </Setting>
+    <Setting Name="DefaultChip" Type="System.String" Scope="User">
+      <Value Profile="(Default)">theChip</Value>
+    </Setting>
+    <Setting Name="DefaultBatch" Type="System.String" Scope="User">
+      <Value Profile="(Default)">NALDB34</Value>
+    </Setting>
+    <Setting Name="DefaultJunction" Type="System.String" Scope="User">
+      <Value Profile="(Default)">M1-M2</Value>
+    </Setting>
+    <Setting Name="DefaultFolder" Type="System.String" Scope="User">
+      <Value Profile="(Default)">PB</Value>
+    </Setting>
+    <Setting Name="DefaultTrace" Type="System.String" Scope="User">
+      <Value Profile="(Default)">f</Value>
+    </Setting>
+    <Setting Name="WatchFolder" Type="System.String" Scope="User">
+      <Value Profile="(Default)">c:\</Value>
+    </Setting>
+    <Setting Name="TraceFolder" Type="System.String" Scope="User">
+      <Value Profile="(Default)">PB</Value>
+    </Setting>
+    <Setting Name="DefaultCatFolder" Type="System.String" Scope="User">
+      <Value Profile="(Default)">f      </Value>
+    </Setting>
+    <Setting Name="BDAQFile" Type="System.String" Scope="User">
+      <Value Profile="(Default)">.\Python\fourclamp_ASU_May2016\BDAQ_server.py</Value>
+    </Setting>
+    <Setting Name="BDAQServer" Type="System.String" Scope="User">
+      <Value Profile="(Default)">127.0.0.1::10000</Value>
+    </Setting>
+    <Setting Name="KeithleyFile" Type="System.String" Scope="User">
+      <Value Profile="(Default)">.\python\sweep.lua</Value>
+    </Setting>
+    <Setting Name="KeithleyAddress" Type="System.String" Scope="User">
+      <Value Profile="(Default)">TCPIP0::129.219.2.84::inst0::INSTR</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

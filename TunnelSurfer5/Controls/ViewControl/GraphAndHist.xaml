@@ -1,0 +1,76 @@
+﻿<UserControl x:Class="TunnelVision.Controls.ViewControl.GraphAndHist"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TunnelVision.Controls.ViewControl"
+             xmlns:winformchart="clr-namespace:System.Windows.Forms.DataVisualization.Charting;assembly=System.Windows.Forms.DataVisualization"
+             mc:Ignorable="d"  Background="#FF404040" 
+             HorizontalAlignment="Stretch" SizeChanged="UserControl_SizeChanged"   Unloaded="UserControl_Unloaded"  Loaded="UserControl_Loaded"
+             d:DesignHeight="300" d:DesignWidth="1157.964">
+    <StackPanel>
+        <Button x:Name="ShowData"  VerticalAlignment="Top" HorizontalAlignment="Left" Click="ShowData_Click" Visibility="Collapsed" >Click to load and manipulate data</Button>
+
+        <StackPanel Orientation="Horizontal" x:Name="CopyButtons">
+            <TextBlock Text="Cursur Position:  "></TextBlock>
+            <TextBlock x:Name="txtChartValue" Width="200" HorizontalAlignment="Left"/>
+            <TextBlock Text="Selected Position:  "></TextBlock>
+            <TextBlock x:Name="txtChartSelect" Width="200" HorizontalAlignment="Right"/>
+            <TextBlock Text="Trace Value:  "></TextBlock>
+            <TextBlock x:Name="txtTraceValue" Width="200" HorizontalAlignment="Right"/>
+            <CheckBox x:Name="fastGraph" IsChecked="False" Checked="fastGraph_Checked" Unchecked="fastGraph_Checked">Low res/Fast graph</CheckBox>
+            <Button Height="20"  x:Name="doCopy" Click="doCopy_Click">Copy visible</Button>
+            <Button Height="20"  x:Name="doExport" Click="doExport_Click">Export binary</Button>
+        </StackPanel>
+        <Grid HorizontalAlignment="Stretch">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"></ColumnDefinition>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="0"  Height="300"    x:Name="hostImage"  HorizontalAlignment="Stretch" Visibility="Collapsed">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="230" ></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="30"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Image Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="2" x:Name="FakeChart1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+            </Grid>
+
+            <WindowsFormsHost Grid.Column="0" x:Name="host" Height="300" HorizontalAlignment="Stretch" SizeChanged="host_SizeChanged">
+                <winformchart:Chart x:Name="chart1" Dock="Fill" MouseUp="chart1_MouseUp">
+
+                    <winformchart:Chart.Series>
+                        <winformchart:Series Name="series" ChartType="Line" />
+                    </winformchart:Chart.Series>
+                    <winformchart:Chart.ChartAreas>
+                        <winformchart:ChartArea />
+                    </winformchart:Chart.ChartAreas>
+                    <winformchart:Chart.Legends>
+                        <winformchart:Legend BackColor="Transparent">
+                        </winformchart:Legend>
+                    </winformchart:Chart.Legends>
+                </winformchart:Chart>
+            </WindowsFormsHost>
+            <WindowsFormsHost Grid.Column="1" x:Name="hostTime" Height="300" HorizontalAlignment="Stretch" SizeChanged="hostTime_SizeChanged" >
+                <winformchart:Chart x:Name="chartHist" Dock="Fill" >
+
+                    <winformchart:Chart.Series>
+                        <winformchart:Series Name="series" ChartType="Line" />
+                    </winformchart:Chart.Series>
+                    <winformchart:Chart.ChartAreas>
+                        <winformchart:ChartArea />
+                    </winformchart:Chart.ChartAreas>
+                    <winformchart:Chart.Legends>
+                        <winformchart:Legend BackColor="Transparent">
+                        </winformchart:Legend>
+                    </winformchart:Chart.Legends>
+                </winformchart:Chart>
+            </WindowsFormsHost>
+        </Grid>
+        <ProgressBar HorizontalAlignment="Stretch" x:Name="LoadingBar" />
+    </StackPanel>
+</UserControl>

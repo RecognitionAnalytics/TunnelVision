@@ -1,0 +1,87 @@
+﻿<UserControl xmlns:ViewControl="clr-namespace:TunnelVision.Controls.ViewControl" 
+             x:Class="TunnelVision.Controls.ViewControl.NewTrace"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:winformchart="clr-namespace:System.Windows.Forms.DataVisualization.Charting;assembly=System.Windows.Forms.DataVisualization"
+             xmlns:YATE="clr-namespace:YATE;assembly=YATE"
+             xmlns:TunnelSurfer5="clr-namespace:TunnelVision"
+             xmlns:Devices="clr-namespace:TunnelVision.DeviceControls"
+             xmlns:bDAQ="clr-namespace:TunnelVision.DeviceControls.bDAQ"
+             xmlns:Keithley="clr-namespace:TunnelVision.DeviceControls.Keithley"
+             xmlns:Axon="clr-namespace:TunnelVision.DeviceControls.Axon"
+             xmlns:Data="clr-namespace:TunnelVision.DataModel" Loaded="UserControl_Loaded"
+             mc:Ignorable="d"  Background="#FF404040" 
+             HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Unloaded="UserControl_Unloaded"  d:DesignHeight="900" d:DesignWidth="900"  DataContextChanged="UserControl_DataContextChanged">
+    <UserControl.Resources>
+        <DataTemplate DataType="{x:Type bDAQ:bDAQVM}">
+            <bDAQ:bDAQView></bDAQ:bDAQView>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type Keithley:KeithleyVM}">
+            <Keithley:KeithleyView></Keithley:KeithleyView>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type Axon:AxonVM}">
+            <Axon:AxonView></Axon:AxonView>
+        </DataTemplate>
+
+    </UserControl.Resources>
+    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <ViewControl:GraphAndHist x:Name="theGraph" Grid.Row="0" />
+
+        <Grid x:Name="AutomationPanel"  MinHeight="300" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.Row="1" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="120"/>
+                <ColumnDefinition MinWidth="870"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0"  Text="Measurement Tool"></TextBlock>
+                <ListBox   Grid.Row="1" Height="100"  x:Name="lbMeasureTool" SelectionChanged="lbMeasureTool_SelectionChanged" Margin="5,0,5,0"/>
+                <TextBlock   Grid.Row="2"  Text="Data trace Program" Margin="5,0,5,0"></TextBlock>
+                <ListBox  Grid.Row="3"  Height="104" x:Name="lbPrograms" ItemsSource="{Binding theDataRig.TraceScripts}" SelectedItem="{Binding theDataRig.TraceScript, Mode=TwoWay}" Margin="5,0,5,0"/>
+                <TextBlock  Grid.Row="4"   Text="Concentration (mM)" Margin="5,0,5,0"></TextBlock>
+                <TextBox   Grid.Row="5"  x:Name="tbConcentration" Height="23" TextWrapping="Wrap" Text="{Binding Concentration, Mode=TwoWay}" Margin="5,0,5,0"/>
+                <TextBlock  Grid.Row="6"   Text="Analyte" Margin="5,0,5,0"></TextBlock>
+                <TextBox  Grid.Row="7"  x:Name="tbAnalyte" Height="23" TextWrapping="Wrap" Text="{Binding Analyte, Mode=TwoWay}" Margin="5,0,5,0"/>
+
+                <TextBlock   Grid.Row="8"  Text="Buffer Concentration (mM)"></TextBlock>
+                <TextBox   Grid.Row="9"  x:Name="tbBufferConcentration" Height="23" TextWrapping="Wrap" Text="{Binding BufferConcentration, Mode=TwoWay}" Margin="5,0,5,0"/>
+                
+                <TextBlock   Grid.Row="10"  Text="Buffer"></TextBlock>
+                <TextBox   Grid.Row="11"  x:Name="tbBuffer" Height="23" TextWrapping="Wrap" Text="{Binding Buffer, Mode=TwoWay}" Margin="5,0,5,0"/>
+
+                <TextBlock   Grid.Row="12"  Text="Number Pores"></TextBlock>
+                <TextBox   Grid.Row="13"  x:Name="tbNumPores" Height="23" TextWrapping="Wrap" Text="{Binding NumberPores, Mode=TwoWay}" Margin="5,0,5,0"/>
+            </Grid>
+
+            <ContentPresenter Grid.Column="1" x:Name="DeviceGUI" Content="{Binding theDataRig}">
+                
+                
+            </ContentPresenter>
+
+            <TextBlock Text="{Binding analysis}" Grid.Column="2"></TextBlock>
+        </Grid>
+
+    </Grid>
+</UserControl>

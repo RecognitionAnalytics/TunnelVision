@@ -1,0 +1,79 @@
+﻿<UserControl xmlns:Documents="clr-namespace:TunnelVision.Controls.Documents"  xmlns:ViewControl="clr-namespace:TunnelVision.Controls.ViewControl"  x:Class="TunnelVision.DocumentHolder"
+             xmlns:TunnelVision="clr-namespace:TunnelVision"
+              xmlns:Data="clr-namespace:TunnelVision.DataModel"
+             xmlns:ViewModel="clr-namespace:TunnelVision.Controls.TreeViewModel"
+             xmlns:DeviceViewsBDAQ="clr-namespace:TunnelVision.DeviceControls.bDAQ"
+              xmlns:DeviceViewsKeithley="clr-namespace:TunnelVision.DeviceControls.Keithley"
+              xmlns:DeviceViewsAxon="clr-namespace:TunnelVision.DeviceControls.Axon"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+            
+             mc:Ignorable="d"  
+             d:DesignHeight="300" d:DesignWidth="500">
+    <UserControl.Resources>
+        <DataTemplate DataType="{x:Type DeviceViewsBDAQ:bDAQVM}">
+            <DeviceViewsBDAQ:bDAQSettingsView />
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type DeviceViewsAxon:AxonVM}">
+            <DeviceViewsAxon:AxonSettingsView />
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type DeviceViewsKeithley:KeithleyVM}">
+            <DeviceViewsKeithley:KeithleySettingsView />
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type ViewModel:DataTraceVM}">
+            <ViewControl:DataReviewView />
+        </DataTemplate>
+        
+        <DataTemplate DataType="{x:Type ViewModel:NewDataTraceVM}">
+            <ViewControl:NewTrace />
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type ViewModel:IVTraceVM}">
+            <TunnelVision:IVcurveHolder />
+        </DataTemplate>
+        
+        <DataTemplate DataType="{x:Type ViewModel:ExperimentVM}">
+            <ViewControl:ReportView />
+        </DataTemplate>
+        
+        <DataTemplate DataType="{x:Type ViewModel:BatchVM}">
+            <ViewControl:ReportView />
+        </DataTemplate>
+        
+        <DataTemplate DataType="{x:Type ViewModel:ChipVM}">
+            <ViewControl:ReportView />
+        </DataTemplate>
+        
+        <DataTemplate DataType="{x:Type ViewModel:FolderVM}">
+            <ViewControl:ReportView />
+        </DataTemplate>
+        
+        <DataTemplate DataType="{x:Type ViewModel:IVFolderVM}">
+            <ViewControl:ReportView />
+        </DataTemplate>
+        
+        <DataTemplate DataType="{x:Type ViewModel:JunctionVM}">
+            <ViewControl:ReportView />
+        </DataTemplate>
+        
+        <DataTemplate DataType="{x:Type ViewModel:TraceFolderVM}">
+            <ViewControl:ReportView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type ViewModel:DBWatcherVM}">
+            <Documents:DatabaseWatcher />
+        </DataTemplate>
+    </UserControl.Resources>
+
+    <ContentPresenter Content="{Binding }"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+
+    </ContentPresenter>
+
+
+
+
+</UserControl>

@@ -1,0 +1,120 @@
+﻿<Controls:MetroWindow x:Class="TunnelVision.Controls.AddFileDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        Title="Add File Dialog" Height="678.461" Width="450">
+    <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" >
+        <StackPanel HorizontalAlignment="Stretch" MinWidth="200">
+            <TextBlock>Filename</TextBlock>
+            <TextBox x:Name="tbFilename" MaxWidth="190"></TextBox>
+
+            <GroupBox>
+                <StackPanel>
+                    <TextBlock>Trace Name</TextBlock>
+                    <TextBox x:Name="tbTraceName"  MaxWidth="190"></TextBox>
+
+                    <TextBlock >Control</TextBlock>
+                    <CheckBox x:Name="isControl"></CheckBox>
+
+                    <TextBlock >Junction</TextBlock>
+                    <TextBox x:Name="tbJunction"></TextBox>
+
+
+                    <TextBlock >Chip Name</TextBlock>
+                    <TextBox x:Name="tbChipName"></TextBox>
+
+                    <TextBlock>Batch Name</TextBlock>
+                    <TextBox x:Name="tbBatchName"></TextBox>
+                    <TextBlock>Experiment</TextBlock>
+                    <TextBox x:Name="tbExperiment"></TextBox>
+                </StackPanel>
+            </GroupBox>
+            <GroupBox>
+                <StackPanel>
+                    <TextBlock >ALD Cycles</TextBlock>
+                    <TextBox x:Name="tbALDCycles"></TextBox>
+
+                    <TextBlock >Drill Method</TextBlock>
+                    <TextBox x:Name="tbDrillMethod">HIM</TextBox>
+
+                    <TextBlock >Gap Size (nm)</TextBlock>
+                    <TextBox x:Name="tbGapSize">2</TextBox>
+                </StackPanel>
+            </GroupBox>
+            <GroupBox>
+                <StackPanel>
+                    <TextBlock >Buffer</TextBlock>
+                    <TextBox x:Name="tbBuffer"></TextBox>
+
+                    <TextBlock >Analyte</TextBlock>
+                    <TextBox x:Name="tbAnalyte"></TextBox>
+
+                    <TextBlock >Concentration (mM)</TextBlock>
+                    <TextBox x:Name="tbConcentration"></TextBox>
+                </StackPanel>
+            </GroupBox>
+            <TextBlock Text=" "></TextBlock>
+            <TextBlock Text=" "></TextBlock>
+            <TextBlock Text=" "></TextBlock>
+
+        </StackPanel>
+        <StackPanel MinWidth="10">
+
+        </StackPanel>
+        <StackPanel HorizontalAlignment="Stretch" MaxWidth="250">
+            <GroupBox>
+                <StackPanel>
+                    <TextBlock >Number of Pores</TextBlock>
+                    <TextBox x:Name="tbNumPores">3</TextBox>
+
+
+                    <TextBlock >Pore size (nm)</TextBlock>
+                    <TextBox x:Name="tbPoreSize">10</TextBox>
+                </StackPanel>
+            </GroupBox>
+            <GroupBox>
+                <StackPanel>
+
+                    <TextBlock >Top Reference (mV)</TextBlock>
+                    <TextBox x:Name="tbTopReference"></TextBox>
+
+                    <TextBlock >Bottom Reference (mV)</TextBlock>
+                    <TextBox x:Name="tbBttmRef"></TextBox>
+
+                    <TextBlock >Tunnel bias (mV)</TextBlock>
+                    <TextBox x:Name="tbTunnel"></TextBox>
+
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel>
+                            <TextBlock >Ionic</TextBlock>
+                            <CheckBox x:Name="isIonic"></CheckBox>
+                        </StackPanel>
+                        <TextBlock Text="          "></TextBlock>
+                        <StackPanel>
+                            <TextBlock >IV sweep</TextBlock>
+                            <CheckBox x:Name="isSweep"></CheckBox>
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+            </GroupBox>
+
+
+
+            <GroupBox>
+                <StackPanel>
+                    <TextBlock >Notes</TextBlock>
+                    <TextBox x:Name="tbNotes" Height="125" Width="175"  TextWrapping="Wrap"></TextBox>
+                </StackPanel>
+            </GroupBox>
+            <TextBlock Text=" "></TextBlock>
+
+            <Button Click="Button_Click" >Save</Button>
+            <TextBlock Text=" "></TextBlock>
+
+            <Button x:Name="btnCancel" Click="btnCancel_Click">Cancel</Button>
+
+            <TextBlock Text=" "></TextBlock>
+            <TextBlock x:Name="tbMessage" Text=" "></TextBlock>
+        </StackPanel>
+    </StackPanel>
+</Controls:MetroWindow>

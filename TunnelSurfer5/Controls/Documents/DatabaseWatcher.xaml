@@ -1,0 +1,36 @@
+﻿<UserControl x:Class="TunnelVision.Controls.Documents.DatabaseWatcher"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TunnelVision.Controls.Documents"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="600">
+    <Grid >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="40"></RowDefinition>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" Text="Tunnel Trace Executable:"></TextBlock>
+        <TextBox Grid.Row="1" x:Name="tbtraceExe" Text="%python% &quot;%pyDir%\bridge.py&quot; %filename% %outfilename% %controlFile% %concentration% %NumberPores%"></TextBox>
+
+        <TextBlock Grid.Row="2" Text="Ionic Trace Executable:"></TextBlock>
+        <TextBox Grid.Row="3" x:Name="tbionicExe" Text="%python% &quot;%pyDir%\bridge.py&quot; %filename% %outfilename% %controlFile% %concentration% %NumberPores%"></TextBox>
+
+        <TextBlock Grid.Row="4" Text="Tunnel IV Executable:"></TextBlock>
+        <TextBox Grid.Row="5" x:Name="tbTunnelIVExe" Text="%python% &quot;%pyDir%\BridgeIV.py&quot; %filename% %outfilename% %controlFile% %concentration% %NumberPores%"></TextBox>
+
+        <TextBlock Grid.Row="6" Text="Ionic IV Executable:"></TextBlock>
+        <TextBox Grid.Row="7" x:Name="tbIonicIVExe" Text="%python% &quot;%pyDir%\BridgeIV.py&quot; %filename% %outfilename% %controlFile% %concentration% %NumberPores%"></TextBox>
+        <TextBlock Text=" " Grid.Row="8"></TextBlock>
+        <Button Grid.Row="9" Click="Button_Click">Watch</Button>
+    </Grid>
+</UserControl>

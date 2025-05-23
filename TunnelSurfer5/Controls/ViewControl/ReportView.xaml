@@ -1,0 +1,169 @@
+﻿<UserControl x:Class="TunnelVision.Controls.ViewControl.ReportView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TunnelVision.Controls.ViewControl"
+              xmlns:YATE="clr-namespace:YATE;assembly=YATE"
+              xmlns:winformchart="clr-namespace:System.Windows.Forms.DataVisualization.Charting;assembly=System.Windows.Forms.DataVisualization"
+              xmlns:TunnelVision="clr-namespace:TunnelVision"
+              xmlns:Data="clr-namespace:TunnelVision.DataModel"
+             xmlns:ViewModel="clr-namespace:TunnelVision.Controls.TreeViewModel"
+             mc:Ignorable="d"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources >
+
+
+        <DataTemplate  DataType="{x:Type TunnelVision:ColumnChartViewModel}">
+            <Grid >
+                <Grid.RowDefinitions>
+                    <RowDefinition>
+
+                    </RowDefinition>
+                    <RowDefinition>
+
+                    </RowDefinition>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0"  MinHeight="{Binding MinHeight}"  Visibility="{Binding LoadScreen}"
+                                  VerticalAlignment="Stretch"  HorizontalAlignment="Stretch">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="20" ></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="30"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Image Stretch="Fill" Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="2" Source="{Binding ExampleImage}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                    <Button Grid.Row="0" Grid.Column="0" MaxHeight="30" MaxWidth="230" Width="230" VerticalAlignment="Top" HorizontalAlignment="Left" Command="{Binding RequestFullDataCommand}" >Click to load and manipulate data</Button>
+                </Grid>
+
+                <WindowsFormsHost    Grid.Row="1" MinHeight="{Binding MinHeight}"  Visibility="{Binding ShowGraph}"
+                                     SizeChanged="host_SizeChanged"  Loaded="host_Loaded">
+                    <winformchart:Chart  Dock="Fill" >
+                        <winformchart:Chart.Series>
+                            <winformchart:Series Name="series" ChartType="Column" />
+                        </winformchart:Chart.Series>
+                        <winformchart:Chart.ChartAreas>
+                            <winformchart:ChartArea />
+                        </winformchart:Chart.ChartAreas>
+                        <winformchart:Chart.Legends>
+                            <winformchart:Legend BackColor="Transparent">
+                            </winformchart:Legend>
+                        </winformchart:Chart.Legends>
+                    </winformchart:Chart>
+                </WindowsFormsHost>
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate  DataType="{x:Type TunnelVision:ScatterChartViewModel}">
+            <Grid >
+                <Grid.RowDefinitions>
+                    <RowDefinition>
+
+                    </RowDefinition>
+                    <RowDefinition>
+
+                    </RowDefinition>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0"  MinHeight="{Binding MinHeight}"  Visibility="{Binding LoadScreen}"
+                                  VerticalAlignment="Stretch"  HorizontalAlignment="Stretch">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="20" ></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="30"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="2" Source="{Binding ExampleImage}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+                    <Button Grid.Row="0" Grid.Column="0" MaxHeight="30" MaxWidth="230" Width="230" VerticalAlignment="Top" HorizontalAlignment="Left" Command="{Binding RequestFullDataCommand}" >Click to load and manipulate data</Button>
+                </Grid>
+
+                <StackPanel Grid.Row="0" Orientation="Horizontal" Visibility="{Binding ShowGraph}">
+                    <Button Click="ScatterCopy_Clicked">Copy Visible</Button>
+                    <TextBlock Text="{Binding CurrentPoint}"/>
+                </StackPanel>
+                <WindowsFormsHost Grid.Row="1" MinHeight="{Binding MinHeight}"  Visibility="{Binding ShowGraph}"
+                                  VerticalAlignment="Stretch"  HorizontalAlignment="Stretch" SizeChanged="host_SizeChanged" Loaded="scatterHost_Loaded">
+                    <winformchart:Chart  Dock="Fill" >
+                        <winformchart:Chart.Series>
+                            <winformchart:Series Name="series" ChartType="Column" />
+                        </winformchart:Chart.Series>
+                        <winformchart:Chart.ChartAreas>
+                            <winformchart:ChartArea />
+                        </winformchart:Chart.ChartAreas>
+                        <winformchart:Chart.Legends>
+                            <winformchart:Legend BackColor="Transparent">
+                            </winformchart:Legend>
+                        </winformchart:Chart.Legends>
+                    </winformchart:Chart>
+                </WindowsFormsHost>
+            </Grid>
+
+        </DataTemplate>
+
+        <DataTemplate x:Key="NormalTemplate">
+            <Expander Margin="0"  IsExpanded="{Binding IsSelected, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBoxItem}}}" 
+                      Header="{Binding ShortNote}" Background="#FF404040" Foreground="White" Expanded="Expander_Expanded">
+                <FlowDocumentReader x:Name="testFlow" HorizontalAlignment="Stretch" MaxHeight="400"></FlowDocumentReader>
+            </Expander>
+        </DataTemplate>
+
+        <DataTemplate  DataType="{x:Type ViewModel:NoteListVM}" >
+            <StackPanel   DataContextChanged="NoteList_DataContextChanged"    Loaded="NoteList_Loaded"  HorizontalAlignment="Stretch" Background="#FF404040">
+                <TextBlock Text="New Note"  Background="#FF404040" HorizontalAlignment="Stretch"/>
+                <YATE:YATEExEditor Grid.Row="0" x:Name="YateToolbar"  HorizontalAlignment="Left"   />
+                <YATE:YATEditor x:Name="NewNote"  MinHeight="400" VerticalAlignment="Stretch" MinWidth="300"/>
+                <Button Click="YateToolbar_SaveClicked">Save Note</Button>
+                <ListBox x:Name="lbNoteList"  ItemsSource="{Binding Notes}" ItemTemplate="{DynamicResource NormalTemplate}" HorizontalAlignment="Stretch"/>
+
+            </StackPanel>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type TunnelVision:AddChipWindow }">
+            <ListBox  Visibility="{Binding showExtra}" ItemsSource="{Binding extraInfo}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel  >
+                            <TextBlock Text="{Binding Header}" Background="#FF404040" FontSize="14" FontStyle="Oblique" />
+                            <TextBlock Text="{Binding Info}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </DataTemplate>
+    </UserControl.Resources>
+    <ScrollViewer  ScrollViewer.HorizontalScrollBarVisibility="Auto"  Height="{Binding Path=ActualHeight, 
+           RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UIElement}}"
+                    Width ="{Binding Path=ActualWidth, 
+           RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UIElement}}" CanContentScroll="True">
+
+        <Grid VerticalAlignment="Stretch"  HorizontalAlignment="Stretch" Background="#FF2F2F2F">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <TextBlock  Grid.Column="0" Grid.Row="0"  Text="Loading database" x:Name="tbLoading" FontSize="50" Foreground="White"></TextBlock>
+            <ScrollViewer  Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                <ListView ItemsSource="{Binding Column1}">
+                    
+                    
+                </ListView>
+            </ScrollViewer>
+            <ScrollViewer Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" >
+                <ListView ItemsSource="{Binding Column2}" >
+
+                   
+                </ListView>
+            </ScrollViewer>
+        </Grid>
+
+    </ScrollViewer>
+</UserControl>

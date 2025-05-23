@@ -1,0 +1,201 @@
+﻿<Controls:MetroWindow xmlns:TunnelVision="clr-namespace:TunnelVision"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:Documents ="clr-namespace:TunnelVision.Controls.Documents"
+        xmlns:YATE="clr-namespace:YATE;assembly=YATE"
+        x:Class="TunnelVision.MainWindow"  WindowState="Maximized"
+        Title="Tunnel Vision" Height="1200" Width="1800" Icon="icon2.ico">
+
+
+    <Grid x:Name="layoutRoot">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+            <ColumnDefinition Width="5"></ColumnDefinition>
+            <ColumnDefinition Width="5*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <DockPanel Grid.Row="0" Grid.ColumnSpan="3" Grid.Column="0">
+            <Grid HorizontalAlignment="Stretch">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="50" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="*"/>
+
+                </Grid.ColumnDefinitions>
+                <Menu DockPanel.Dock="Top" Grid.Column="0" Grid.ColumnSpan="3" BorderThickness="0,0,2,0" >
+                    <MenuItem Header="_Home"  Click="HomeMenuItem_Click">
+                    </MenuItem>
+                    <Separator Margin="0,-2"   />
+                    <MenuItem Header="|" >
+                    </MenuItem>
+                    <Separator Margin="0,-2"   />
+                    <MenuItem Header="_Data Aquisition"  Click="HardwareMenuItem_Click">
+                    </MenuItem>
+                    <Separator Margin="0,-2"   />
+                    <MenuItem Header="|" >
+                    </MenuItem>
+                    <Separator Margin="0,-2"   />
+                    <MenuItem Header="_Graph">
+                    </MenuItem>
+                    <Separator Margin="0,-2"   />
+                    <MenuItem Header="|" >
+                    </MenuItem>
+                    <Separator Margin="0,-2"   />
+                    <MenuItem Header="_Watch" x:Name="miWatch" Click="miWatch_Click">
+                    </MenuItem>
+                </Menu>
+                <Grid HorizontalAlignment="Stretch" Visibility="Collapsed"  Background="#FF404040"  Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" x:Name="HardwareButtons">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0" Orientation="Horizontal">
+                        <Button x:Name="btnBDAQ"  BorderThickness="1,0" Width="70"  Click="bDAQButton_Click" ToolTip="Settings for BDAQ">
+                            <StackPanel Height="34" Width="40" RenderTransformOrigin="-0.4,-0.088">
+                                <Image x:Name="bDAQ" Source="Icons/bDAQLogo3.png" Height="34" />
+                            </StackPanel>
+                        </Button>
+                        <Button  x:Name="btnKeithleyButton"  BorderThickness="1,0" Width="70"  Click="keithleyButton_Click" ToolTip="Settings for Keithley">
+                            Keithley
+                        </Button>
+                        <Button  x:Name="btnAxonButton"  BorderThickness="1,0" Width="70"  Click="axonButton_Click" ToolTip="Settings for Axon">
+                            <StackPanel Height="34" Width="40" RenderTransformOrigin="-0.4,-0.088">
+                                <Image x:Name="Axon" Source="Icons/axonSettings.png" Height="34" />
+                            </StackPanel>
+                        </Button>
+                        <Button  x:Name="btnNIDAQButton"  BorderThickness="1,0" Width="70"  Click="NiDAQButton_Click" ToolTip="Settings for NIDAQ">
+                            <StackPanel Height="34" Width="40" RenderTransformOrigin="-0.4,-0.088">
+                                <Image x:Name="NIDAQ" Source="Icons/NI.png" Height="34" />
+                            </StackPanel>
+                        </Button>
+
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Grid.Column="1"></StackPanel>
+                    <StackPanel Orientation="Horizontal" Grid.Column="2">
+
+                        <Button  BorderThickness="1,0"  x:Name="SettingsButtonHard" Click="HardSettingsButton_Click">
+                            <StackPanel Height="34" Width="30" RenderTransformOrigin="-0.4,-0.088">
+                                <Image Source="Icons/glyphicons-517-menu-hamburger.png"></Image>
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+                </Grid>
+
+                <Grid HorizontalAlignment="Stretch"   Background="#FF404040"  Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" x:Name="HomeButtons">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0" Orientation="Horizontal">
+                        <Button x:Name="OpenFileButton"  BorderThickness="1,0" Width="70"  Click="OpenFileButton_Click" ToolTip="Open file without database">
+                            <StackPanel Height="34" Width="40" RenderTransformOrigin="-0.4,-0.088">
+                                <Image x:Name="openFile" Source="Icons/OpenTrace.png"  />
+                            </StackPanel>
+                        </Button>
+
+                        <Button  x:Name="addFileButton"  BorderThickness="1,0" Width="70"  Click="addFileButton_Click" ToolTip="Add file to database">
+                            <StackPanel Height="34" Width="40" RenderTransformOrigin="-0.4,-0.088">
+                                <Image x:Name="addFile" Source="Icons/glyphicons-145-folder-open.png" AllowDrop="True" Drop="addFile_Drop" DragEnter="addFile_DragEnter" DragLeave="addFile_DragLeave" />
+                            </StackPanel>
+                        </Button>
+
+                        <Button Visibility="Collapsed" x:Name="watchFileButton"  BorderThickness="1,0" Width="70"  Click="watchFileButton_Click" ToolTip="Watch output folder">
+                            <StackPanel Height="34" Width="40" RenderTransformOrigin="-0.4,-0.088">
+                                <Image x:Name="watchFile" Source="Icons/watch.png" AllowDrop="True" Drop="addFile_Drop" DragEnter="addFile_DragEnter" DragLeave="addFile_DragLeave" />
+                            </StackPanel>
+                        </Button>
+
+                        <Button Visibility="{Binding Document.MenuButtons.AddBatchButton}" BorderThickness="1,0" Width="70" x:Name="AddBatch" Click="AddBatch_Click" ToolTip="Add Batch">
+                            <StackPanel Height="42" Width="40" RenderTransformOrigin="-0.4,-0.088">
+                                <Image Source="Icons/batch.png" />
+                            </StackPanel>
+                        </Button>
+
+                        <Button Visibility="{Binding Document.MenuButtons.AddChipButton}" BorderThickness="1,0" Width="70" x:Name="AddChip" Click="AddChip_Click" ToolTip="Add Chip">
+                            <StackPanel Height="34" Width="40" RenderTransformOrigin="-0.4,-0.088">
+                                <Image Source="Icons/glyphicons-146-chip-plus.png" />
+                            </StackPanel>
+                        </Button>
+
+                        <Button Visibility="{Binding Document.MenuButtons.AddJunctionButton}" BorderThickness="1,0" Width="70" x:Name="AddJunction" Click="AddJunction_Click" ToolTip="Add Junction">
+                            <StackPanel Height="34" Width="40" RenderTransformOrigin="-0.4,-0.088">
+                                <Image Source="Icons/glyphicons-146-junction-plus.png" />
+                            </StackPanel>
+                        </Button>
+
+                        <Button   BorderThickness="1,0" Width="70"  x:Name="butStats"  Visibility="{Binding Document.MenuButtons.StatsButton}" ToolTip="Extended report">
+                            <StackPanel Height="34" Width="40" RenderTransformOrigin="-0.4,-0.088">
+                                <Image Source="Icons/glyphicons-42-charts.png"/>
+                            </StackPanel>
+                        </Button>
+
+                        <Button  Visibility="{Binding Document.MenuButtons.AddDataTraceButton}" BorderThickness="1,0" Width="70" x:Name="dataTraceButton" Click="dataTraceButton_Click" ToolTip="Take data trace">
+                            <StackPanel Height="34" Width="40" RenderTransformOrigin="-0.4,-0.088">
+                                <Image Source="Icons/glyphicons-283-cardio.png" Height="33" />
+                            </StackPanel>
+                        </Button>
+
+                        <Button Visibility="{Binding Document.MenuButtons.AddTunnelButton}" BorderThickness="1,0" Width="70" x:Name="ivTraceButton" Click="ivTraceButton_Click" ToolTip="Take Tunnel curve">
+                            <StackPanel Height="39" Width="32" RenderTransformOrigin="-0.4,-0.088">
+                                <Image Source="Icons/Linegraph.png" />
+                            </StackPanel>
+                        </Button>
+
+                        <Button Visibility="{Binding Document.MenuButtons.AddIonicButton}" BorderThickness="1,0" Width="70" x:Name="ionicivTraceButton" Click="ionicivTraceButton_Click" ToolTip="Take Ionic Trace">
+                            <StackPanel Height="39" Width="32" RenderTransformOrigin="-0.4,-0.088">
+                                <Image Source="Icons/ionicLinegraph.png" />
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Grid.Column="1"></StackPanel>
+                    <StackPanel Orientation="Horizontal" Grid.Column="2">
+                        <Button BorderThickness="1,0"  x:Name="btnUpload" Visibility="{Binding Document.MenuButtons.UploadButton}" Click="btnUpload_Click">
+                            <StackPanel Height="34" Width="30" RenderTransformOrigin="-0.4,-0.088">
+                                <Image Source="Icons/upload.png"></Image>
+                            </StackPanel>
+                        </Button>
+
+                        <Button   BorderThickness="1,0"  x:Name="btnBroken" Visibility="{Binding Document.MenuButtons.BrokenButton}" Click="btnBroken_Click">
+                            <StackPanel Height="34" Width="30" RenderTransformOrigin="-0.4,-0.088">
+                                <Image Source="Icons/Broken.png"></Image>
+                            </StackPanel>
+                        </Button>
+                        <Button  BorderThickness="1,0"  x:Name="btnBad" Visibility="{Binding Document.MenuButtons.BadButton}" Click="btnBad_Click">
+                            <StackPanel Height="34" Width="30" RenderTransformOrigin="-0.4,-0.088">
+                                <Image Source="Icons/Bad.png"></Image>
+                            </StackPanel>
+                        </Button>
+                        <Button  BorderThickness="1,0"  x:Name="btnGood" Visibility="{Binding Document.MenuButtons.GoodButton}" Click="btnGood_Click">
+                            <StackPanel Height="34" Width="30" RenderTransformOrigin="-0.4,-0.088">
+                                <Image Source="Icons/Good.png"></Image>
+                            </StackPanel>
+                        </Button>
+                        <Button  BorderThickness="1,0"  x:Name="SettingsButton" Click="SettingsButton_Click">
+                            <StackPanel Height="34" Width="30" RenderTransformOrigin="-0.4,-0.088">
+                                <Image Source="Icons/glyphicons-517-menu-hamburger.png"></Image>
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </DockPanel>
+
+
+        <TunnelVision:DataExplorerView Grid.Column="0" Grid.Row="1" x:Name="DataViewer" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+
+        <GridSplitter Grid.Column="1" Grid.Row="1" HorizontalAlignment="Stretch" />
+
+        <TunnelVision:DocumentHolder Grid.Column="2" Grid.Row="1" x:Name="MainTest"  DataContext="{Binding Document}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+
+    </Grid>
+</Controls:MetroWindow>
